@@ -1,9 +1,8 @@
-﻿namespace ThingEx.UserService.Core
+﻿namespace ThingEx.UserService.Core;
+
+public class ShardInfo
 {
-    public static class ShardInfo
-    {
-        public static int UserFromId { get; set; }
-        public static int UserToId { get; set; }
-        public static string ShardName => $"users{UserFromId}_{UserToId}";
-    }
+    public int UserFromId { get; set; }
+    public int UserToId { get; set; }
+    public string ShardName => $"users{UserFromId}_{UserToId}";
 }

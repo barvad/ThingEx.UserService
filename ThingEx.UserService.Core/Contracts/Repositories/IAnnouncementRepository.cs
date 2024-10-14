@@ -1,7 +1,6 @@
-﻿namespace ThingEx.UserService.Core.Contracts.Repositories
+﻿namespace ThingEx.UserService.Core.Contracts.Repositories;
+
+public interface IAnnouncementRepository
 {
-    public interface IAnnouncementRepository
-    {
-        void AddAnnouncement(Announcement announcement);
-    }
+    void AddAnnouncement(Announcement announcement);
 }
