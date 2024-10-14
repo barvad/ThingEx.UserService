@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using ThingEx.UserService.Core.Contracts.Repositories;
+using ThingEx.UserService.Core.Contracts.Services;
+using ThingEx.UserService.Core.Services;
 using ThingEx.UserService.DatabaseContext;
 using ThingEx.UserService.Extensions;
+using ThingEx.UserService.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,10 +14,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddShardInfo();
-builder.Services.AddDbContext<UserServiceDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
-});
+
+builder.Services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
+builder.Services.AddScoped<IAnnouncementService, AnnouncementService>();
+var isDevelopment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+var connectionString = builder.Configuration.GetConnectionString("Postgres") ??
+                       throw new NullReferenceException("Connection string not specified! (Postgres)");
+connectionString = isDevelopment
+    ? connectionString.Replace("${HOST}", "localhost")
+        .Replace("${PASSWORD}", "P@ssword")
+    : connectionString.Replace("${HOST}", Environment.GetEnvironmentVariable("db_host"))
+        .Replace("${PASSWORD}", Environment.GetEnvironmentVariable("db_pass"));
+builder.Services.AddDbContext<UserServiceDbContext>(options => options.UseNpgsql(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

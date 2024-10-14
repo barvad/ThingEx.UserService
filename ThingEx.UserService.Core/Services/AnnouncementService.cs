@@ -16,4 +16,9 @@ public class AnnouncementService : IAnnouncementService
     {
         _announcementRepository.AddAnnouncement(announcement);
     }
+
+    public IEnumerable<Announcement> GetAnnouncements()
+    {
+        return _announcementRepository.GetAnnouncements();
+    }
 }

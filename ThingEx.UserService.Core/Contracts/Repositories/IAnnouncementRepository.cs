@@ -3,4 +3,5 @@
 public interface IAnnouncementRepository
 {
     void AddAnnouncement(Announcement announcement);
+    IEnumerable<Announcement> GetAnnouncements();
 }

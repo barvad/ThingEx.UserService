@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ThingEx.UserService.Core\ThingEx.UserService.Core.csproj" />
+    <ProjectReference Include="..\ThingEx.UserService.DatabaseContext\ThingEx.UserService.DatabaseContext.csproj" />
   </ItemGroup>
 
 </Project>

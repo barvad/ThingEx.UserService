@@ -8,5 +8,9 @@ public class AnnouncementEntityConfiguration : IEntityTypeConfiguration<Announce
     public void Configure(EntityTypeBuilder<Announcement> builder)
     {
         builder.ToTable("Announcements");
+        builder.HasKey(p => p.Id);
+        builder.Property(p => p.Title).HasMaxLength(500);
+        builder.Property(p => p.Text).HasMaxLength(5000);
+
     }
 }

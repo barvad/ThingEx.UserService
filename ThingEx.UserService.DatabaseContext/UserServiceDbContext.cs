@@ -4,6 +4,10 @@ namespace ThingEx.UserService.DatabaseContext;
 
 public sealed class UserServiceDbContext : DbContext
 {
+    public UserServiceDbContext()
+    {
+
+    }
     public UserServiceDbContext(DbContextOptions<UserServiceDbContext> options) : base(options)
     {
         Database.EnsureCreated();
